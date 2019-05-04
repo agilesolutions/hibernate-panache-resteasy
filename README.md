@@ -12,6 +12,10 @@ While the code is surprisingly simple, under the hood this is using:
  - Infinispan based caching
  - All safely coordinated by the Narayana Transaction Manager
 
+## how this project was created
+
+log on to [katacoda k8s course site](https://www.katacoda.com/courses/kubernetes/launch-single-node-cluster)
+
 ## Requirements
 
 To compile and run this demo you will need:
