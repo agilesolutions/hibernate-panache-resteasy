@@ -12,10 +12,6 @@ While the code is surprisingly simple, under the hood this is using:
  - Infinispan based caching
  - All safely coordinated by the Narayana Transaction Manager
 
-## how this project was created
-
-log on to [katacoda k8s course site](https://www.katacoda.com/courses/kubernetes/launch-single-node-cluster)
-
 ## Requirements
 
 To compile and run this demo you will need:
@@ -35,6 +31,22 @@ and `GRAALVM_HOME` environment variables to it.
 You should then use this JDK to run the Maven build.
 
 
+## before building this demo
+
+- log on to [katacoda k8s course site](https://www.katacoda.com/courses/kubernetes/launch-single-node-cluster)
+- git clone https://github.com/agilesolutions/hibernate-panache-resteasy.git
+- curl -O http://mirror.easyname.ch/apache/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz
+- tar xvf apache-maven-3.6.0-bin.tar.gz
+- mv apache-maven-3.6.0  /usr/local/apache-maven
+- export M2_HOME=/usr/local/apache-maven
+- export M2=$M2_HOME/bin
+- export PATH=$M2:$PATH
+- cd hibernate-panache-resteasy
+- mvn package
+- docker logs -f postgres-1
+- docker rm -f postgres-1
+
+
 ## Building the demo
 
 After having set GraalVM as your JVM, launch the Maven build on
@@ -48,7 +60,7 @@ the checked out sources of this demo:
 
 First we will need a PostgreSQL database; you can launch one easily if you have Docker installed:
 
-> docker run --ulimit memlock=-1:-1 -it --rm=true --memory-swappiness=0 --name quarkus_test -e POSTGRES_USER=quarkus_test -e POSTGRES_PASSWORD=quarkus_test -e POSTGRES_DB=quarkus_test -p 5432:5432 postgres:10.5
+> docker run --ulimit memlock=-1:-1 -d --rm=true --memory-swappiness=0 --name quarkus_test -e POSTGRES_USER=quarkus_test -e POSTGRES_PASSWORD=quarkus_test -e POSTGRES_DB=quarkus_test -p 5432:5432 postgres:10.5
 
 Alternatively you can setup a PostgreSQL instance in any another way.
 
